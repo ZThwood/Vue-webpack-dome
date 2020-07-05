@@ -35,8 +35,9 @@ export default {
       const { data } = await this.$http.get(
         "/api/getcomments/" + this.newsid + "?pageindex=" + this.pageindex
       );
-      console.log(data);
+      // console.log(data);
       if (data.status === 0)
+      //concat() 方法用于合并两个或多个数组。此方法不会更改现有数组，而是返回一个新数组。
         return (this.cmts = this.cmts.concat(data.message));
     },
     loadMore() {

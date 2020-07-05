@@ -41,7 +41,7 @@ export default {
 .mui-media-body {
   h1 {
     font-size: 14px;
-  }
+  } 
   .mui-ellipsis {
     display: flex;
     justify-content: space-between;

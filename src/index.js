@@ -14,6 +14,11 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import router from './router.js'
 
+// 导入vue-preview
+import VuePreview from 'vue-preview'
+
+Vue.use(VuePreview)
+
 
 // vue实例
 const vm = new Vue({

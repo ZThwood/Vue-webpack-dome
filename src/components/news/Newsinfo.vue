@@ -23,7 +23,7 @@ export default {
       newsinfo: {}
     };
   },
-  props: ["id"],
+  props: ["id"],  //接受父组件传过来的id  
   methods: {
     async getNewsinfo() {
       const { data } = await this.$http.get("/api/getnew/" + this.id);

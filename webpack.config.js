@@ -16,6 +16,7 @@ module.exports = {
     port: 3000,
     // contentBase: 'dist',
     hot: true
+    // host: "192.168.137.1"
   },
   plugins: [  //任何插件都放这里
     new htmlWebpackPlugin({

@@ -2,19 +2,21 @@ const path = require('path');
 
 // 导入插件
 const htmlWebpackPlugin = require('html-webpack-plugin')
-// 导入clean-webpack-plugin插件
+// 导入clean-webpack-plugin插件，每次打包清除dist目录的老文件
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 // 压缩css插件
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   entry: {
     app: './src/index.js',//入口，要打包的文件
-    vendors: ['jquery'] //第三方包名称，vendors是自定义名称，分离用
+    vendors: ['jquery','vue','vuex','vue-router','axios','mint-ui'] //第三方包名称，vendors是自定义名称，分离用
   },
   output: { //输出文件
     filename: 'bundle.js',  //打包好的文件名称
@@ -28,7 +30,7 @@ module.exports = {
   },
   plugins: [  //任何插件都放这里
     new htmlWebpackPlugin({
-      template: path.join(__dirname, './dist/index.html'), //指定模板页面到内存生成
+      template: path.join(__dirname, './src/index.html'), //指定模板页面到内存生成
       filename: 'index.html', //指定生成页面的名称
       minify:{   //html 压缩选项
         removeComments: true,  //去除注释
@@ -38,9 +40,10 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new ExtractTextPlugin({
-      filename: 'css/styles.css'
+      filename: 'css/styles.css'//css打包路径
     }),
-    new OptimizeCssAssetsPlugin()
+    new OptimizeCssAssetsPlugin(),
+    new VueLoaderPlugin()
   ],
   optimization: {
     splitChunks: {
@@ -56,9 +59,24 @@ module.exports = {
   },
   module: { //这个节点用于配置所有第三方 模块加载器（loader）
     rules: [//所有第三方模块的匹配规则
-      { test: /\.css$/, use: ['style-loader', 'css-loader'] },//配置成立.css文件的规则
-      { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
-      { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
+      { test: /\.css$/, use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: ['css-loader'],
+        publicPath:'../'
+      })},//配置成立.css文件的规则
+      { test: /\.less$/, use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: ['css-loader', 'less-loader'],
+        publicPath:'../'
+      })},
+      { test: /\.scss$/, use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: ['css-loader', 'sass-loader'],
+        publicPath:'../'
+      })},
+      // {test:  /\.(jpg|png|gif|bmp|jpeg)$/, use: ExtractTextPlugin.extract({
+        
+      // })}
 
       { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: ['url-loader?limit=97,490&name=[hash:8]-[name].[ext]'] },
       { test: /\.(ttf|woff|woff2|eot|svg)$/, use: 'url-loader' },//url-loader也可以处理字体文件

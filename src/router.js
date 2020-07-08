@@ -11,6 +11,7 @@ import PhotoInfo from './components/photos/PhotoInfo.vue'
 import GoodsList from './components/goods/GoodsList.vue'
 import GoodsInfo from './components/goods/GoodsInfo.vue'
 import GoodsDesc from './components/goods/GoodsDesc.vue'
+import GoodsComment from './components/goods/GoodsComment.vue'
 
  
 const router = new VueRouter({
@@ -27,7 +28,8 @@ const router = new VueRouter({
     {path: '/home/photos/:id', component: PhotoInfo, props:true},
     {path: '/home/goods', component: GoodsList},
     {path: '/home/goods/:id', component: GoodsInfo, props:true},
-    {path: '/home/goods/:id/goodsdesc', component: GoodsDesc, props: true }
+    {path: '/home/goods/goodsdesc/:id', component: GoodsDesc, props: true },
+    {path: '/home/goods/goodscomment/:id', component: GoodsComment, props: true, name:"goodscmt"}
 
   ],
   linkActiveClass: 'mui-active active'

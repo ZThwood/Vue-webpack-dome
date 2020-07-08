@@ -1,7 +1,7 @@
 <template>
   <div class="mui-numbox" data-numbox-min="1" :data-numbox-max="numMax">
     <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-    <input id="test" class="mui-input-numbox" type="number" value="1" />
+    <input id="test" class="mui-input-numbox" type="number" value="1" ref="numBox" @change="numberChange"/>
     <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
   </div>
 </template>
@@ -14,6 +14,13 @@ export default {
   props: ["numMax"],
   mounted () {
     mui('.mui-numbox').numbox()
+  },
+  methods: {
+    numberChange () {
+      const val = this.$refs.numBox.value
+      // 给父组件传值
+      this.$emit('func', parseInt(val))
+    }
   },
   watch: {
     numMax:function (newval, oldval) {

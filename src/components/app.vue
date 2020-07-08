@@ -23,18 +23,21 @@
       </router-link>
       <router-link class="my-tab-item" to="/shopcar">
         <span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-          <span class="mui-badge">9</span>
+          <span class="mui-badge" id="badge">{{totalcount}}</span>
         </span>
         <span class="mui-tab-label">购物车</span>
       </router-link>
       <router-link class="my-tab-item" to="/search">
         <span class="mui-icon mui-icon-search"></span>
         <span class="mui-tab-label">搜索</span>
-      </router-link>
+      </router-link> 
     </nav>
   </div>
 </template>
 <script>
+// 映射getters
+import { mapGetters } from "vuex"
+
 export default {
   data() {
     return {
@@ -61,6 +64,9 @@ export default {
         this.isHome = true
       }
     }
+  },
+  computed: {
+    ...mapGetters(["totalcount"])
   }
 };
 </script>

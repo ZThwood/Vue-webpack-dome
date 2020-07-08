@@ -16,8 +16,12 @@ import router from './router.js'
 
 // 导入vue-preview
 import VuePreview from 'vue-preview'
-
 Vue.use(VuePreview)
+
+//导入vuex状态管理对象
+import store from './store.js'
+
+
 
 
 // vue实例
@@ -27,5 +31,6 @@ const vm = new Vue({
   // 采用render渲染根组件
   render:h => h(app),
   //挂载路由，同名可简写
-  router
+  router,
+  store
 })

@@ -1,3 +1,4 @@
+// 购物车数量选择框
 <template>
   <div class="mui-numbox" data-numbox-min="1" style="height:25px;">
     <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>

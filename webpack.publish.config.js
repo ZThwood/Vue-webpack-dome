@@ -10,7 +10,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // 压缩css插件
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-
+//允许以一种名为单文件组件 (SFCs)的格式撰写 Vue 组件 （.vue）
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
     filename: 'bundle.js',  //打包好的文件名称
     path: path.resolve(__dirname, 'dist') //指定打包到哪里
   },
-  devServer: {
+  devServer: {  //npm run dev 运行配置
     open: true,
     port: 3000,
     // contentBase: 'dist',
@@ -38,8 +38,8 @@ module.exports = {
         removeAttributeQuotes: true //移除属性节点的引号
       }
     }),
-    new CleanWebpackPlugin(),
-    new ExtractTextPlugin({
+    new CleanWebpackPlugin(), 
+    new ExtractTextPlugin({  //css打包，配合路由表使用
       filename: 'css/styles.css'//css打包路径
     }),
     new OptimizeCssAssetsPlugin(),
@@ -59,7 +59,7 @@ module.exports = {
   },
   module: { //这个节点用于配置所有第三方 模块加载器（loader）
     rules: [//所有第三方模块的匹配规则
-      { test: /\.css$/, use: ExtractTextPlugin.extract({
+      { test: /\.css$/, use: ExtractTextPlugin.extract({//配合css抽离
         fallback: 'style-loader',
         use: ['css-loader'],
         publicPath:'../'
@@ -74,10 +74,6 @@ module.exports = {
         use: ['css-loader', 'sass-loader'],
         publicPath:'../'
       })},
-      // {test:  /\.(jpg|png|gif|bmp|jpeg)$/, use: ExtractTextPlugin.extract({
-        
-      // })}
-
       { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: ['url-loader?limit=97,490&name=[hash:8]-[name].[ext]'] },
       { test: /\.(ttf|woff|woff2|eot|svg)$/, use: 'url-loader' },//url-loader也可以处理字体文件
       //配置 babel

@@ -1,13 +1,13 @@
 <template>
   <div class="app-container">
     <!-- <mt-header fixed title="fixed top"></mt-header> -->
-    <mt-header title="他大姨妈" fixed>
+    <mt-header title="综合项目" fixed>
       <span slot="left" @click="goBack" v-show="isHome">
         <mt-button icon="back">返回</mt-button>
       </span>
       <mt-button icon="more" slot="right" v-show="isHome"></mt-button>
     </mt-header>
-
+  <!-- 添加动画切换 -->
     <transition>
       <router-view></router-view>
     </transition>
@@ -23,7 +23,8 @@
       </router-link>
       <router-link class="my-tab-item" to="/shopcar">
         <span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-          <span class="mui-badge" id="badge">{{totalcount}}</span>
+                                          <!-- 获取vuex的getters的数据 -->
+          <span class="mui-badge" id="badge">{{ totalcount }}</span>
         </span>
         <span class="mui-tab-label">购物车</span>
       </router-link>
@@ -70,18 +71,15 @@ export default {
   }
 };
 </script>
-∥/这里写的样式,要符合scss语法,并且,样式是当前组件私有的,不会成为全局的样式,也不会应用给子组件
+//这里写的样式,要符合scss语法,并且,样式是当前组件私有的,不会成为全局的样式,也不会应用给子组件
 <style lang="scss" scoped>
 .app-container {
   padding-top: 40px;
   padding-bottom: 50px;
-
   //当有组件切换动效的时候，切换的时候页面会同时存在两个组件并把页面撑大
   //造成了根组件上下部分重新拉动条，把超出隐藏即可
   overflow: hidden;
-
   .myhead {
-   
     z-index: 999;
     width: 100%;
   }

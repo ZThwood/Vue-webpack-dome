@@ -1,7 +1,7 @@
 //商品详情
 <template>
   <div class="decs-container">
-    <h1 class="title">{{goodsdesc.title}}</h1>  
+    <h1 class="title">{{ goodsdesc.title }}</h1>  
     <hr>
     <div v-html="goodsdesc.content" class="content"></div>  
   </div>

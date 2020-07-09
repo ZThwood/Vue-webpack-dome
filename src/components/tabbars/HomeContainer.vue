@@ -13,7 +13,7 @@
         <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
           <router-link to="/home/photos">
             <span class="mui-icon mui-icon-image">
-              <span class="mui-badge">5</span>
+              <span class="mui-badge">0</span>
             </span>
             <div class="mui-media-body">图片分享</div>
           </router-link>
@@ -54,11 +54,11 @@ export default {
       lunbotu: []
     };
   },
-  created() {
+  created () {
     this.getLunbo();
   },
   methods: {
-    async getLunbo() {
+    async getLunbo () {
       const { data } = await this.$http.get("/api/getlunbo");
       // console.log(data);
       if (data.status === 0) this.lunbotu = data.message;

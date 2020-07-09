@@ -9,7 +9,7 @@ module.exports = {
   entry: './src/index.js', //入口要打包的文件
   output: { //输出文件
     filename: 'bundle.js',  //打包好的文件名称
-    path: path.resolve(__dirname, 'dist') //指定打包到哪里
+    path: path.resolve(__dirname, 'dist') //指定打包到哪个文件夹
   },
   devServer: {
     open: true,
@@ -34,8 +34,8 @@ module.exports = {
       { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: ['url-loader?limit=97,490&name=[hash:8]-[name].[ext]'] },
       { test: /\.(ttf|woff|woff2|eot|svg)$/, use: 'url-loader' },//url-loader也可以处理字体文件
       //配置 babel
-      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
-      { test: /\.vue$/, use: ['vue-loader'] }
+      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },//js打包
+      { test: /\.vue$/, use: ['vue-loader'] } //vue文件加载
     ]
   }
 }

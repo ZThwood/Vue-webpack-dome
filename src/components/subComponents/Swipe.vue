@@ -1,13 +1,15 @@
+//轮播图组件
 <template>
     <mt-swipe :auto="4000">
       <mt-swipe-item v-for="(item, index) in lunbotuname" :key="index">
-        <img :src="item[imgpath]" :class="[ isfull ? 'img-full' : 'img-normal']" />
+        <img :src="item[imgpath]" :class="[ isfull ? 'img-full' : 'img-normal' ]" />
       </mt-swipe-item>
     </mt-swipe>
 </template>
  
  <script>
 export default {
+  //分别是data数据、接口路径名、是否铺满宽高
   props: ["lunbotuname", "imgpath", "isfull"]
 };
 </script>

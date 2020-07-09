@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1 class="titlehead">{{imageinfolist.title}}</h1>
+    <h1 class="titlehead">{{ imageinfolist.title }}</h1>
     <p class="info">
       <!-- 使用过滤器过滤时间格式 -->
-      <span>发表时间:{{imageinfolist.add_time | dateFormat('YYYY-MM-DD HH:mm:ss') }}</span>
-      <span>点击数:{{imageinfolist.click}}</span>
+      <span>发表时间:{{ imageinfolist.add_time | dateFormat('YYYY-MM-DD HH:mm:ss') }}</span>
+      <span>点击数:{{ imageinfolist.click}}</span>
     </p>
     <hr />
     <!-- <ul class="thumbimg">
@@ -36,12 +36,12 @@ export default {
     };
   },
   methods: {
-    async getImageInfo() {
+    async getImageInfo () {
       const { data } = await this.$http.get("/api/getimageInfo/" + this.id);
       // console.log(data)
       if (data.status === 0) return (this.imageinfolist = data.message[0]);
     },
-    async getThumbImg() {
+    async getThumbImg () {
       const { data } = await this.$http.get("/api/getthumimages/" + this.id);
       console.log(data);
       if (data.status === 0) {
@@ -53,12 +53,12 @@ export default {
       }
       this.thumbimg = data.message;
     },
-    handleClose() {
+    handleClose () {
       console.log("close event");
     }
   },
   props: ["id"],
-  created() {
+  created () {
     this.getImageInfo();
     this.getThumbImg();
   },

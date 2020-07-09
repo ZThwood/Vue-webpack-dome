@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1 class="titlehead">{{newsinfo.title}}</h1>
+    <h1 class="titlehead">{{ newsinfo.title }}</h1>
     <p class="info">
       <!-- 使用过滤器过滤时间格式 -->
-      <span>发表时间:{{newsinfo.add_time | dateFormat('YYYY-MM-DD HH:mm:ss') }}</span>
-      <span>点击数:{{newsinfo.click}}</span>
+      <span>发表时间:{{ newsinfo.add_time | dateFormat('YYYY-MM-DD HH:mm:ss') }}</span>
+      <span>点击数:{{ newsinfo.click }}</span>
     </p>
     <hr>
     <div class="content" v-html="newsinfo.content"></div>
@@ -25,14 +25,14 @@ export default {
   },
   props: ["id"],  //接受父组件传过来的id  
   methods: {
-    async getNewsinfo() {
+    async getNewsinfo () {
       const { data } = await this.$http.get("/api/getnew/" + this.id);
       // console.log(data);
 
       if (data.status === 0) return (this.newsinfo = data.message[0]);
     }
   },
-  created() {
+  created () {
     this.getNewsinfo();
   },
   components: {

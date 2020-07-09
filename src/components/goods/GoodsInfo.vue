@@ -12,18 +12,18 @@
 
     <!-- 商品区域 -->
     <div class="mui-card">
-      <div class="mui-card-header">{{goodsinfo.title}}</div>
+      <div class="mui-card-header">{{ goodsinfo.title }}</div>
       <div class="mui-card-content">
         <div class="mui-card-content-inner">
           <p class="price">
             市场价:
             <span style="margin-right:10px">
-              <del>￥{{goodsinfo.market_price}}</del>
+              <del>￥{{ goodsinfo.market_price }}</del>
             </span>
             销售价:
             <span
               style="font-size:16px;color:red;font-weight:700;"
-            >￥{{goodsinfo.sell_price}}</span>
+            >￥{{ goodsinfo.sell_price }}</span>
           </p>
 
           <p>
@@ -37,7 +37,7 @@
           </p>
           <div>
             <mt-button type="primary" size="small">立即购买</mt-button>
-            <mt-button type="danger" size="small" @click="addToCart()">加入购物车</mt-button>
+            <mt-button type="danger" size="small" @click="addToCart">加入购物车</mt-button>
           </div>
         </div>
       </div>
@@ -48,9 +48,9 @@
       <div class="mui-card-header">商品参数</div>
       <div class="mui-card-content">
         <div class="mui-card-content-inner">
-          <p>商品货号:{{goodsinfo.goods_no}}</p>
-          <p>库存情况：{{goodsinfo.stock_quantity}}</p>
-          <p>上架时间：{{goodsinfo.add_time | dateFormat('YYYY-MM-DD hh-mm-ss') }}</p>
+          <p>商品货号:{{ goodsinfo.goods_no }}</p>
+          <p>库存情况：{{ goodsinfo.stock_quantity }}</p>
+          <p>上架时间：{{ goodsinfo.add_time | dateFormat('YYYY-MM-DD hh-mm-ss') }}</p>
         </div>
       </div>
       <div class="mui-card-footer btnarea">
@@ -82,22 +82,22 @@ export default {
   props: ["id"],
   methods: {
     ...mapMutations(["addToCar"]),
-    async getlunbotu() {
+    async getlunbotu () {
       const { data } = await this.$http.get("/api/getthumimages/" + this.id);
       if (data.status === 0) return (this.lunbotu = data.message);
     },
-    async getGoodsInfo() {
+    async getGoodsInfo () {
       const { data } = await this.$http.get("/api/goods/getinfo/" + this.id);
       if (data.status === 0) return (this.goodsinfo = data.message[0]);
     },
-    goDesc() {
+    goDesc () {
       this.$router.push("/home/goods/goodsdesc/" + this.id);
     },
-    goCom() {
+    goCom () {
       this.$router.push({ name: "goodscmt", params: { id: this.id } });
     },
     
-    addToCart() {
+    addToCart () {
       this.flag = !this.flag;
       // this.$store.commit("addToCar", {
       //   id: this.id,
@@ -113,10 +113,10 @@ export default {
     },
 
     // 半场动画
-    beforeEnter(el) {
+    beforeEnter (el) {
       el.style.transform = "translate(0, 0)";
     },
-    enter(el, done) {
+    enter (el, done) {
       // 获取小球坐标
       const ballPos = el.getBoundingClientRect();
       // console.log(ballPos);
@@ -132,19 +132,19 @@ export default {
       //设置过渡
       el.style.transition = "all 0.5s cubic-bezier(.46,-0.4,1,.49)";
       //done() 是afterEnter(el)函数的引用，用于动画结束后立刻消失
-      done();
+      done ();
     },
-    afterEnter(el) {
+    afterEnter (el) {
       this.flag = !this.flag;
     },
 
     //获取子组件传过来的值
-    getNumberBoxValue(val) {
+    getNumberBoxValue (val) {
       console.log(val);
       this.selectedCount = val;
     }
   },
-  created() {
+  created () {
     this.getlunbotu();
     this.getGoodsInfo();
   },
@@ -177,7 +177,6 @@ export default {
     top: 300px;
     left: 143px;
     z-index: 99;
-    // transform: translate(87, 250);
   }
 }
 </style>

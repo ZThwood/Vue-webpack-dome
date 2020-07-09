@@ -5,15 +5,15 @@
         <div class="images">
           <img :src="item.img_url" alt />
         </div>
-        <h1 class="title">{{item.title}}</h1>
+        <h1 class="title">{{ item.title }}</h1>
         <div class="info">
           <p class="price">
-            <span class="new">{{item.sell_price}}</span>
-            <span class="old">{{item.market_price}}</span>
+            <span class="new">{{ item.sell_price }}</span>
+            <span class="old">{{ item.market_price }}</span>
           </p>
           <p class="sell">
             <span>热卖中</span>
-            <span>剩{{item.stock_quantity}}件</span>
+            <span>剩{{ item.stock_quantity }}件</span>
           </p>
         </div>
       </router-link>
@@ -33,7 +33,7 @@ export default {
     };
   },
   methods: {
-    async getGoodsListByPage() {
+    async getGoodsListByPage () {
       const { data } = await this.$http.get(
         "/api/getgoods?pageindex=" + this.page
       );
@@ -48,7 +48,7 @@ export default {
         this.goodslist = this.goodslist.concat(data.message)
       }
     },
-    loadMore() {
+    loadMore () {
       //点击按钮获取更多的评论
       //让pageindex + 1之后，再调用getCommentByPageff
       // if (this.isloaded) return;
@@ -56,7 +56,7 @@ export default {
       this.getGoodsListByPage();
     }
   },
-  created() {
+  created () {
     this.getGoodsListByPage();
   }
 };

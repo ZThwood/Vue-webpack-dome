@@ -5,11 +5,11 @@
         <router-link :to="'/home/news/' + item.id">
           <img class="mui-media-object mui-pull-left" :src="item.img_url" />
           <div class="mui-media-body">
-            <h1>{{item.title}}</h1>
+            <h1>{{ item.title }}</h1>
             <p class="mui-ellipsis">
                 <!-- 使用过滤器过滤时间格式 -->
-              <span>发表时间:{{item.add_time | dateFormat('YYYY-MM-DD') }}</span>
-              <span>点击数:{{item.click}}</span>
+              <span>发表时间:{{ item.add_time | dateFormat('YYYY-MM-DD') }}</span>
+              <span>点击数:{{ item.click }}</span>
             </p>
           </div>
         </router-link>
@@ -24,11 +24,11 @@ export default {
       newslist: []
     };
   },
-  created() {
+  created () {
     this.getNewsList();
   },
   methods: {
-    async getNewsList() {
+    async getNewsList () {
       //获取数据
       const { data } = await this.$http.get("/api/getnewslist");
       // console.log(data);

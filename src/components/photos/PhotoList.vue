@@ -6,12 +6,13 @@
         class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted"
       >
         <div class="mui-scroll ">
+          <!-- 点击时触发，但是在web手机端，clikc会有200-300ms的延时，所以要用tap代替click作为点击事件 -->
           <span 
-            :class="['mui-control-item',item.id === 0 ? 'mui-active':'']"
+            :class="[ 'mui-control-item',item.id === 0 ? 'mui-active':'' ]"
             v-for="item in phototype"
             :key="item.id"
             @tap="getPhotoByCategory(item.id)"
-          >{{item.title}}
+          >{{ item.title }}
           </span>
         </div>
       </div>
@@ -23,7 +24,7 @@
         <!-- lazy加载的图片区域 -->
         <img v-lazy="item.img_url" />
         <div class="info">
-          <h1 class="info-title">{{item.title}}</h1>
+          <h1 class="info-title">{{ item.title }}</h1>
           <div class="info-content" v-html="item.content"></div>
         </div>
       </router-link>
@@ -41,14 +42,14 @@ export default {
       photolist: []
     };
   },
-  created() {
+  created () {
     this.getPhotoType();
     this.getPhotoByCategory(0);
   },
   methods: {
-    async getPhotoType() {
+    async getPhotoType () {
       const { data } = await this.$http.get("/api/getimgcategory");
-
+        // 添加到开头
       if (data.status === 0)
         data.message.unshift({
           title: "全部",
@@ -56,15 +57,15 @@ export default {
         });
       this.phototype = data.message;
     },
-    async getPhotoByCategory(id) {
+    async getPhotoByCategory (id) {
       const { data } = await this.$http.get("/api/getimages/" + id);
       // console.log(data);
       if (data.status === 0) return (this.photolist = data.message);
     }
   },
   //如果要引入第三方插件最好在mounted中引入
-  mounted() {
-    mui(".mui-scroll-wrapper").scroll({
+  mounted () {
+    mui(".mui-scroll-wrapper").scroll({ //mui导航栏滚动效果
       deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
     });
   }
@@ -109,7 +110,7 @@ export default {
       }
     }
   }
-  img[lazy=loading] {
+  img[lazy=loading] { //懒加载
   width: 40px;
   height: 300px;
   margin: auto;
